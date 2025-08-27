@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janaganandhini | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f6fb;
+      color: #333;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background: #1a1a1a;
+      color: #eee;
+    }
+    header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      font-size: 48px;
+    }
+    header p { font-size: 18px; margin-top: 10px; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+    body.dark nav { background: #333; }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      padding: 15px;
+      display: block;
+      transition: color 0.3s;
+    }
+    body.dark nav ul li a { color: #eee; }
+    nav ul li a:hover { color: #2575fc; }
+
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    section { padding: 60px 20px; max-width: 1100px; margin: auto; opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+    section.show { opacity: 1; transform: translateY(0); }
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #222;
+    }
+    body.dark section h2 { color: #fff; }
+
+    /* About */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .about img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .about p { font-size: 18px; }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .skill {
+      background: #fff;
+      padding: 12px 20px;
+      border-radius: 25px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      font-weight: 600;
+    }
+    body.dark .skill { background: #333; color: #fff; }
+
+    /* Education */
+    .education {
+      display: grid;
+      gap: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    .edu-item {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    body.dark .edu-item { background: #333; }
+    .edu-item h3 { margin-bottom: 8px; }
+    .edu-item span { font-size: 14px; color: #555; }
+    body.dark .edu-item span { color: #bbb; }
+
+    /* Projects */
+    .filter-controls { text-align: center; margin-bottom: 20px; }
+    .filter-controls button {
+      margin: 5px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #2575fc;
+      color: #fff;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .project {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform .3s;
+    }
+    body.dark .project { background: #333; }
+    .project:hover { transform: translateY(-8px); }
+    .project img { width: 100%; height: 200px; object-fit: cover; }
+    .project .info { padding: 20px; }
+    .project .info h3 { margin-bottom: 10px; font-size: 22px; }
+    .project .info p { font-size: 15px; color: #555; }
+    body.dark .project .info p { color: #ddd; }
+
+    /* Contact */
+    .contact {
+      text-align: center;
+      font-size: 18px;
+    }
+    .contact a {
+      color: #2575fc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    @media(max-width: 768px){
+      .about { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hey, I'm Janaganandhini M</h1>
+    <p>Co-Founder of Archon Tech | Web Developer | Tech Enthusiast</p>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙 </button>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about">
+      <img src="Photo.jpg" alt="Profile">
+      <div>
+        <p>Hi I'm Janaganandhini I'm the <b>Co-Founder of Archon Tech</b> passionate about building modern websites and digital solutions with creativity and style.</p>
+        <p>Currently, I’m improving my skills in Content writing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">💻 HTML</div>
+      <div class="skill">🎨 CSS</div>
+      <div class="skill">⚡ JavaScript</div>
+      <div class="skill">🐍 Python</div>
+      <div class="skill">🖼️ Canva</div>
+      <div class="skill">✍🏼 Content writing</div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education">
+      <div class="edu-item">
+        <h3>👩‍🎓 BCA-Final Year</h3>
+        <h3>📄 Salesforce Certification</h3>
+        <h3>🐍 Python (<b>Infosys Springboard)</b></h3>
+        <h3>🌐 Web Development (<b>IBM SkillsBuild)</b></h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project" data-category="web">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1000" alt="Project 1">
+        <div class="info">
+          <h3>Portfolio Website</h3>
+          <p>Built a responsive and stylish personal Portfolio.</p>
+        </div>
+      </div>
+      <div class="project" data-category="app">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000" alt="Project 2">
+        <div class="info">
+          <h3>Lease management</h3>
+          <p>Developed a Salesforce-based solution for property management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact">
+      <p>Email: <a href="mailto:cofounder.archon@gmail.com">cofounder.archon@gmail.com</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Janaga. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    function toggleTheme(){
+      document.body.classList.toggle('dark');
+    }
+
+    // Scroll animations
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight / 1.2;
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if(top < trigger){ sec.classList.add('show'); }
+      });
+    });
+
+    // Filter projects
+    function filterProjects(category){
+      document.querySelectorAll('.project').forEach(proj => {
+        if(category === 'all' || proj.dataset.category === category){
+          proj.style.display = 'block';
+        } else {
+          proj.style.display = 'none';
+        }
+      });
+    }
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
